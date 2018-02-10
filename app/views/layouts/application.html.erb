@@ -5,8 +5,9 @@
     <title><%= content_for?(:title) ? yield(:title) : "Coupon Challenge" %></title>
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Coupon Challenge" %>">
     <%= stylesheet_link_tag 'application', media: 'all' %>
-    <%= stylesheet_link_tag "#{controller_name}_#{action_name}" if asset_exists?("#{controller_name}_#{action_name}.css") %>
     <%= javascript_include_tag 'application' %>
+    <!-- Include stylesheets/javascripts per controller_action for page-specific assets -->
+    <%= stylesheet_link_tag "#{controller_name}_#{action_name}" if asset_exists?("#{controller_name}_#{action_name}.css") %>
     <%= javascript_include_tag "#{controller_name}_#{action_name}" if asset_exists?("#{controller_name}_#{action_name}.js") %>
     <%= csrf_meta_tags %>
   </head>
