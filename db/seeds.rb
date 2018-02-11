@@ -3,10 +3,13 @@ require 'activerecord-import'
 # Create Users
 users = []
 1000.times do |n|
+  x_days_ago = Time.zone.now - rand(31..60).days
   users.push User.new(
     name: "#{Faker::Name.first_name} #{Faker::Name.last_name}",
     email: "user_#{n}@example.com",
-    balance: 20.0
+    balance: 20.0,
+    created_at: x_days_ago,
+    updated_at: x_days_ago
   )
 end
 puts "Importing #{users.count} seed users (with $20.00 balances)"
@@ -38,10 +41,13 @@ brand_ids = Brand.pluck(:id)
 User.pluck(:id).each do |user_id|
   n = rand(5..15)
   n.times do
+    x_days_ago = Time.zone.now - rand(30).days
     coupons.push Coupon.new(
       poster_id: user_id,
       brand_id: brand_ids.sample,
-      value: rand(1..40) / 2.0 # 0.50 to 20.00 in 50 cent increments
+      value: rand(1..40) / 2.0, # 0.50 to 20.00 in 50 cent increments
+      created_at: x_days_ago,
+      updated_at: x_days_ago
     )
   end
 end
@@ -49,21 +55,20 @@ puts "Importing #{coupons.count} coupons (please wait)"
 Coupon.import coupons
 
 # Create Transfers
-# We'll randomly transfer half of all coupons.
-puts 'Transferring half of all coupons and adjusting balances (please wait longer)'
+# We'll attempt to transfer all coupons, but many will be unsuccessful as balances drop.
+puts 'Transferring roughly half of all coupons and adjusting balances (please wait longer)'
 
-n = Coupon.count / 2
-coupons = Coupon.limit(n).order("RANDOM()")
 user_ids = User.pluck(:id)
 successful_requests = 0
 unsuccessful_requests = 0
-
-coupons.each do |coupon|
-  requester = User.find(user_ids.sample)
+Coupon.find_each do |coupon|
+  candidates = user_ids - [coupon.poster_id]
+  requester = User.find(candidates.sample)
   cts = CouponTransferService.new(coupon, requester)
   successful = cts.transfer!
   successful ? successful_requests += 1 : unsuccessful_requests += 1
-  print '.' if successful_requests % 100 == 0
+  print '-' if successful_requests % 100 == 0 && successful
+  # print 'x' if unsuccessful_requests % 100 == 0 && !successful
 end
 
 puts "\nDone!"

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180211025311) do
+ActiveRecord::Schema.define(version: 20180211183414) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,9 +29,11 @@ ActiveRecord::Schema.define(version: 20180211025311) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "requester_id"
+    t.bigint "transfer_id"
     t.index ["brand_id"], name: "index_coupons_on_brand_id"
     t.index ["poster_id"], name: "index_coupons_on_poster_id"
     t.index ["requester_id"], name: "index_coupons_on_requester_id"
+    t.index ["transfer_id"], name: "index_coupons_on_transfer_id"
   end
 
   create_table "transfers", force: :cascade do |t|
@@ -41,6 +43,8 @@ ActiveRecord::Schema.define(version: 20180211025311) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.decimal "commission_amount", null: false
+    t.string "poster_name"
+    t.string "requester_name"
     t.index ["coupon_id"], name: "index_transfers_on_coupon_id"
     t.index ["poster_id"], name: "index_transfers_on_poster_id"
     t.index ["requester_id"], name: "index_transfers_on_requester_id"
@@ -61,6 +65,7 @@ ActiveRecord::Schema.define(version: 20180211025311) do
     t.datetime "updated_at", null: false
     t.decimal "balance", default: "0.0"
     t.string "name"
+    t.string "stripe_customer_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
