@@ -7,8 +7,14 @@ Rails.application.routes.draw do
   resources :transfers, only: [:index]
   resources :users, only: [:index]
 
+  # User coupons
+  get '/my-coupons', to: 'users#coupons', as: 'user_coupons'
+  # Request a coupon
   post '/coupons/:id/request_coupon', to: 'coupons#request_coupon', as: 'request_coupon'
+  # For dataTables views
   post '/coupons/as_json', to: 'coupons#as_json'
   post '/transfers/as_json', to: 'transfers#as_json'
   post '/users/as_json', to: 'users#as_json'
+  # Stripe deposit
+  post '/users/create_charge', to: 'users#create_charge'
 end

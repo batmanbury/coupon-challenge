@@ -34,6 +34,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if !!charge # If a charge object is created, it was successful
+        user.credit_to_balance(charge.amount/100)
         flash.keep[:notice] = "Deposit successful!"
         msg = { status: 200 }
       else
