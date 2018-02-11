@@ -42,9 +42,4 @@ function loadCoupons() {
     });
     $("div.table-header").html('<h1>Available Coupons</h1>');
   }
-  // // Grab It!
-  // $(document).on('click', '.request-coupon-btn', function() {
-  //   var coupon_id = $(this).data('coupon-id');
-  //   console.log(coupon_id);
-  // });
 }

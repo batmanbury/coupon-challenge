@@ -73,7 +73,7 @@
   });
 
   $('#make-deposit').on('click', function(e) {
-    $(this).attr('disabled', true);
+    $(this).attr('disabled', true).html('Please wait...');
     // Open Checkout with further options:
     handler.open({
       name: 'Coupon Marketplace',
@@ -83,7 +83,7 @@
       allowRememberMe: false,
       closed: function() {
         if (!submittedPayment) {
-          $('#make-deposit').removeAttr('disabled');
+          $('#make-deposit').removeAttr('disabled').html('Make a $20 Deposit');
         }
       }
     });

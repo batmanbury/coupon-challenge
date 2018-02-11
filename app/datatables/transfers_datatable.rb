@@ -12,8 +12,8 @@ class TransfersDatatable < AjaxDatatablesRails::Base
   def data
     records.map do |transfer|
       {
-        poster: transfer.poster.name,
-        requester: transfer.requester.name,
+        poster: transfer.poster.try(:name),
+        requester: transfer.requester.try(:name),
         coupon_id: transfer.coupon_id,
         occurred_on: transfer.created_at,
         commission: ActionController::Base.helpers.number_to_currency(transfer.commission_amount, precision: 2)

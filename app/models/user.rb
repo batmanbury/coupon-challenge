@@ -11,7 +11,7 @@ class User < ApplicationRecord
   InsufficientFunds = Class.new(StandardError)
 
   def deduct_from_balance(amount)
-    if amount > balance
+    if amount > self.balance
       raise InsufficientFunds.new('Your balance is too low to request this coupon.')
     else
       self.balance -= amount
