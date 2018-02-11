@@ -54,6 +54,15 @@ RSpec.describe CouponTransferService do
           Transfer.count
         }.by(1)
       end
+
+      it 'associates the coupon to the requester through the transfer' do
+        expect {
+          service = described_class.new(coupon, requester)
+          service.transfer!
+        }.to change {
+          requester.requested_coupons.count
+        }.by(1)
+      end
     end
 
     context 'when a user requests their own coupon' do

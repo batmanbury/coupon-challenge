@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180211002759) do
+ActiveRecord::Schema.define(version: 20180211025311) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,8 +28,10 @@ ActiveRecord::Schema.define(version: 20180211002759) do
     t.boolean "transferred", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "requester_id"
     t.index ["brand_id"], name: "index_coupons_on_brand_id"
     t.index ["poster_id"], name: "index_coupons_on_poster_id"
+    t.index ["requester_id"], name: "index_coupons_on_requester_id"
   end
 
   create_table "transfers", force: :cascade do |t|

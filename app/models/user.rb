@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   has_many :transfers
   has_many :posted_coupons, class_name: 'Coupon', foreign_key: 'poster_id'
-  has_many :requested_coupons, through: :transfers, source: :coupon, foreign_key: 'requester_id'
+  has_many :requested_coupons, class_name: 'Coupon', foreign_key: 'requester_id'
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

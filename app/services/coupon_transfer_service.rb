@@ -29,7 +29,7 @@ class CouponTransferService
         requester_id: @requester.id,
         commission_amount: commission_amount
       )
-      @coupon.transfer!
+      @coupon.transfer_to!(@requester)
     end
   rescue User::InsufficientFunds => e
     errors.add :requester, e.message
