@@ -8,18 +8,19 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  def request_coupon(coupon)
-    successful = Transfer.attempt(coupon, self)
-  end
+  InsufficientFunds = Class.new(StandardError)
 
-  def deduct_from_balance(coupon)
-    raise 'insufficient_funds' if coupon.value > balance
-    balance -= coupon.value
-    save!
+  def deduct_from_balance(amount)
+    if amount > balance
+      raise InsufficientFunds.new('Your balance is too low to request this coupon.')
+    else
+      self.balance -= amount
+      save!
+    end
   end
 
   def credit_to_balance(amount)
-    # Transfer fee handled in transfer.rb
+    # Transfer fee handled in CouponTransferService
     self.balance += amount
     save!
   end

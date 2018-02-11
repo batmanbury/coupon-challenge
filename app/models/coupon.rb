@@ -5,4 +5,9 @@ class Coupon < ApplicationRecord
   belongs_to :transfer, optional: true
 
   scope :transferred, -> { where(transferred: true) }
+
+  def transfer!
+    self.transferred = true
+    save!
+  end
 end
