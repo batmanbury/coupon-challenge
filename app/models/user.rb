@@ -24,4 +24,8 @@ class User < ApplicationRecord
     self.balance += amount
     save!
   end
+
+  def usd_balance
+    format("$%.2f", self.balance)
+  end
 end

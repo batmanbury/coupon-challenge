@@ -12,5 +12,10 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 # application.js, application.css, and all non-JS/CSS in the app/assets
 # folder are already added.
 Rails.application.config.assets.precompile += %w(
-
+  coupons_index.js
+  coupons_index.css
+  users_index.js
+  users_index.css
+  transfers_index.js
+  transfers_index.css
 )

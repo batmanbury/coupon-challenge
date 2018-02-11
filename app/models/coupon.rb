@@ -12,4 +12,8 @@ class Coupon < ApplicationRecord
     self.transferred = true
     save!
   end
+
+  def usd_value
+    format("$%.2f", self.value)
+  end
 end

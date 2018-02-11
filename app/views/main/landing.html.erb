@@ -9,7 +9,11 @@
   <hr class="my-3">
   <p>Keep in mind, if you don't have a sufficient balance to request the coupons you like, you will need to make another deposit. Happy trading!</p>
   <p class="lead">
-    <%= link_to 'Register', new_user_registration_path, class: "btn btn-success btn-lg" %>
+    <% if current_user %>
+      <%= link_to 'Account', edit_user_registration_path, class: "btn btn-success btn-lg" %>
+    <% else %>
+      <%= link_to 'Register', new_user_registration_path, class: "btn btn-success btn-lg" %>
+    <% end %>
     <%= link_to 'Go to the Marketplace', coupons_path, class: "btn btn-primary btn-lg" %>
   </p>
 </div>

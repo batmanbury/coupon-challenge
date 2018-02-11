@@ -13,3 +13,8 @@
 //= require jquery
 //= require rails-ujs
 //= require bootstrap
+
+$(document).ready(function() {
+  var data = $('body').data();
+  $(document).trigger(data.controller + '#' + data.action + ':loaded');
+});

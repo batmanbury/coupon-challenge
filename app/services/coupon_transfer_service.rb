@@ -26,7 +26,9 @@ class CouponTransferService
       Transfer.create!(
         coupon_id: @coupon.id,
         poster_id: @coupon.poster.id,
+        poster_name: @coupon.poster.name,
         requester_id: @requester.id,
+        requester_name: @requester.name,
         commission_amount: commission_amount
       )
       @coupon.transfer_to!(@requester)
