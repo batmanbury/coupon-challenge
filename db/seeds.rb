@@ -1,4 +1,5 @@
 require 'activerecord-import'
+require 'faker'
 
 # Create Users
 users = []
