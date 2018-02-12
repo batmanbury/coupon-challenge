@@ -21,13 +21,13 @@ gem 'pg', '~> 0.21.0'
 gem 'ajax-datatables-rails', '0.4.0'
 gem 'stripe'
 gem 'activerecord-import'
+gem 'faker' # for seeds in prod
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'capybara'
   gem 'selenium-webdriver'
   gem 'factory_bot_rails'
-  gem 'faker'
   gem 'pry-rails'
   gem 'pry-rescue'
   gem 'rspec-rails'
