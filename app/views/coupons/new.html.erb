@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="form-col col-xs-12 col-sm-10 col-md-8 col-lg-4">
+    <h2 class="page-header text-center">Post a Coupon</h2>
+
+    <%= form_for Coupon.new, url: coupons_path, html: { class: "form-horizontal center", method: "post" } do |f| %>
+
+      <div class="form-group">
+        <%= f.label :brand %>
+        <input id="brand_select" name="coupon[brand_name]" data-path="<%= brand_select_path %>" class="form-control" placeholder="Enter a brand" required="true" />
+        <input id="coupon_brand_id" type="hidden" name="coupon[brand_id]" />
+      </div>
+
+      <div class="form-group">
+        <%= f.label :value, 'Face Value' %>
+        <%= f.number_field :value, placeholder: "Coupon Value", step: 0.01, class: "form-control", required: true %>
+      </div>
+
+      <div class="actions">
+        <%= f.hidden_field :poster_id, value: current_user.id %>
+        <%= f.submit "Post", class: "btn btn-outline-primary btn-lg btn-block" %>
+      </div>
+    <% end %>
+  </div>
+</div>

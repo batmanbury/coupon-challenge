@@ -4,10 +4,36 @@ class CouponsController < ApplicationController
   def index
   end
 
-  def create
+  def new
   end
 
-  def new
+  def create
+    brand_name = params[:coupon].delete(:brand_name)
+    coupon = Coupon.new(coupon_params)
+    if params[:coupon][:brand_id].blank?
+      # create a Brand as well
+      new_brand = Brand.where(name: brand_name).first_or_create
+      coupon.brand_id = new_brand.id
+    end
+    if coupon.save
+      flash[:notice] = "Successfully posted a coupon valued at #{coupon.usd_value} for #{coupon.brand.name}."
+    else
+      flash[:danger] = "There was an error with your coupon details."
+    end
+    redirect_to edit_user_registration_path
+  end
+
+  # Supply values for autocompletion in coupons#new
+  def brand_select
+    if params[:term]
+      brands = Brand.where("name ~* ?", "#{params[:term]}")
+    else
+      brands = Brand.all
+    end
+    brands = brands.collect { |b| { label: b.name, value: b.id } }
+    respond_to do |format|
+      format.json { render :json => brands.to_json }
+    end
   end
 
   def destroy
@@ -28,5 +54,11 @@ class CouponsController < ApplicationController
 
   def as_json
     render json: CouponsDatatable.new(view_context, { authtoken: session[:_csrf_token] })
+  end
+
+  private
+
+  def coupon_params
+    params.require(:coupon).permit(:brand_id, :value, :poster_id)
   end
 end

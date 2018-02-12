@@ -26,7 +26,7 @@ function loadCoupons() {
       ],
       buttons: [{
         extend: 'excel',
-        className: 'excel-export-btn',
+        className: 'btn-outline-dark',
         text: 'Export Coupons',
         action: newExportAction,
         exportOptions: {

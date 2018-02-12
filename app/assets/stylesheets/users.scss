@@ -1,8 +1,6 @@
-.form-col {
-  margin: auto;
-}
-
-.deposit-container {
-  text-align: center;
-  margin: 20px auto 60px auto;
+.account-container {
+  #make-deposit, #post-coupon, #go-marketplace {
+    margin-top: 20px;
+    margin-bottom: 60px;
+  }
 }

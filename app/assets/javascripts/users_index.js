@@ -24,7 +24,7 @@ function loadUsers() {
       ],
       buttons: [{
         extend: 'excel',
-        className: 'excel-export-btn',
+        className: 'btn-outline-dark',
         text: 'Export Users',
         action: newExportAction,
         exportOptions: {

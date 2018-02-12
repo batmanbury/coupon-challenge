@@ -23,7 +23,7 @@ function loadTransfers() {
       ],
       buttons: [{
         extend: 'excel',
-        className: 'excel-export-btn',
+        className: 'btn-outline-dark',
         text: 'Export Transactions',
         action: newExportAction,
         exportOptions: {

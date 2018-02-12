@@ -12,9 +12,8 @@ class CouponTransferService
   end
 
   def transfer!
-    if @requester == @coupon.poster
-      raise PosterRequesterConflict.new('You cannot request your own coupon.')
-    end
+    requester_is_not_poster
+    coupon_still_available
     # Deduct coupon value from requester's balance
     if @requester.deduct_from_balance(@coupon.value)
       # Credit coupon value to poster's balance minus fee
@@ -39,5 +38,19 @@ class CouponTransferService
   rescue PosterRequesterConflict => e
     errors.add :poster, e.message
     false
+  end
+
+  private
+
+  def requester_is_not_poster
+    if @requester == @coupon.poster
+      raise PosterRequesterConflict.new('You cannot request your own coupon.')
+    end
+  end
+
+  def coupon_still_available
+    if @coupon.requester.present? || @coupon.transferred
+      raise PosterRequesterConflict.new('This coupon has already been claimed.')
+    end
   end
 end

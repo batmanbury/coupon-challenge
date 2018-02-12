@@ -4,6 +4,10 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :coupons, except: [:edit, :update, :show]
+
+  # For autocompletion in coupons#new
+  get '/coupons/brand_select', to: 'coupons#brand_select', as: 'brand_select'
+
   resources :transfers, only: [:index]
   resources :users, only: [:index]
 

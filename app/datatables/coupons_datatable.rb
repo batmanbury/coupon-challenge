@@ -19,7 +19,7 @@ class CouponsDatatable < AjaxDatatablesRails::Base
         request: (
           "<form action='/coupons/#{coupon.id}/request_coupon' method='post'>
             <input type='hidden' name='authenticity_token' value='#{options[:authtoken]}'>
-            <button type='submit' class='btn btn-success' data-disable-with='Grabbing'>Grab It!</button>
+            <button type='submit' class='btn btn-sm btn-outline-success' data-disable-with='Grabbing'>Grab It!</button>
           </form>"
         ).html_safe
       }

@@ -1,16 +1,12 @@
 <script src="https://checkout.stripe.com/checkout.js"></script>
 
-<div class="container">
-  <div class="form-col col-xs-12 col-sm-10 col-md-8 col-lg-4">
-    <h2 class="page-header text-center">Account Balance:</h2>
+<div class="account-container container row">
+  <div class="form-col col-xs-12 col-sm-12 col-md-8 col-lg-4">
+    <h2 class="page-header text-center">Account Balance</h2>
     <h4 class="page-header text-center"><%= current_user.usd_balance %></h4>
-  </div>
 
-  <div class="form-col col-xs-12 col-sm-10 col-md-8 col-lg-4 deposit-container">
-    <%= button_tag "Make a $20 Deposit", class: "btn btn-success", id: "make-deposit" %>
-  </div>
+    <%= button_tag "Make a $20 Deposit", class: "btn btn-outline-success btn-block", id: "make-deposit" %>
 
-  <div class="form-col col-xs-12 col-sm-10 col-md-8 col-lg-4">
     <h2 class="page-header text-center">Update Account</h2>
 
     <%= form_for resource, as: resource_name, url: registration_path(resource_name), html: { class: "form-horizontal center"} do |f| %>
@@ -29,7 +25,7 @@
       <div class="form-group">
         <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "Confirm New Password", class: "form-control" %>
         <% if @validatable %>
-          <p class="help-block"><%= @minimum_password_length %> characters minimum</p>
+        <p class="help-block"><%= @minimum_password_length %> characters minimum</p>
         <% end %>
       </div>
 
@@ -43,6 +39,57 @@
       </div>
     <% end %>
   </div>
+
+  <div class="form-col col-xs-12 col-sm-12 col-md-8 col-lg-4">
+    <h2 class="page-header text-center">Posted Coupons</h2>
+    <h4 class="page-header text-center">Posted: <%= current_user.posted_coupons.count %> | Sold: <%= current_user.posted_coupons.transferred.count %></h4>
+
+    <%= link_to "Post a Coupon", new_coupon_path, class: "btn btn-outline-primary btn-block", id: "post-coupon" %>
+
+    <table class="table table-bordered table-sm">
+      <caption>Posted Coupons</caption>
+      <thead>
+        <tr>
+          <th>Brand</th>
+          <th>Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% current_user.posted_coupons.includes(:brand).each do |coupon| %>
+          <tr>
+            <td><%= coupon.brand.name %></td>
+            <td><%= number_to_currency(coupon.value, precision: 2) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="form-col col-xs-12 col-sm-12 col-md-8 col-lg-4">
+    <h2 class="page-header text-center">Grabbed Coupons</h2>
+    <h4 class="page-header text-center"><%= current_user.requested_coupons.count %></h4>
+
+    <%= link_to "Go to Marketplace", coupons_path, class: "btn btn-outline-dark btn-block", id: "go-marketplace" %>
+
+    <table class="table table-bordered table-sm">
+      <caption>Grabbed Coupons</caption>
+      <thead>
+        <tr>
+          <th>Brand</th>
+          <th>Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% current_user.requested_coupons.includes(:brand).each do |coupon| %>
+          <tr>
+            <td><%= coupon.brand.name %></td>
+            <td><%= number_to_currency(coupon.value, precision: 2) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
 </div>
 
 
