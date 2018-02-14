@@ -35,6 +35,10 @@ Navigating the Site
   - Enter a brand name by selecting from the autocomplete, or entering a new name
   - Enter a coupon value and submit
   - You will see the coupon in your Posted Coupons, as well as the Marketplace.
+- Export Data
+  - Each data-table view (Marketplace, Transactions, Users) has an "Export" button.
+  - Click the Export button for a download prompt.
+  - Download the full data-table, or a search-filtered list, in excel format.
 
 
 Tests
