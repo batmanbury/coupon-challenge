@@ -17,6 +17,7 @@ Or set up the project locally:
   - `bundle install`
   - `rails db:create db:migrate && rails db:seed`
   - `rails s`
+  - (You will also need a pair of secret/publishable Stripe test keys. Ask for those if you're unable to come up with some.)
 
 Navigating the Site
 -------------------
@@ -39,6 +40,15 @@ Navigating the Site
   - Each data-table view (Marketplace, Transactions, Users) has an "Export" button.
   - Click the Export button for a download prompt.
   - Download the full data-table, or a search-filtered list, in excel format.
+
+Other Highlights
+-----------------
+- Implements a page-specific assets architecture.
+- DataTables views are customized for server-side pagination,
+- `CouponTransferService` handles validations and balance adjustments for coupon transfers.
+  - RSpec tests present for this part of the code.
+- Autocompleted Brand field during Coupon creation.
+  - (When you post a new coupon, select an existing Brand through the autocomplete, or type a new Brand to create one.)
 
 
 Tests
