@@ -1,5 +1,7 @@
-Coupon Challenge
+Coupon Marketplace Challenge
 ================
+
+Coded in ~15 hours as part of a coding challenge.
 
 This application requires:
 
