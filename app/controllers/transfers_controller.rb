@@ -6,6 +6,6 @@ class TransfersController < ApplicationController
   end
 
   def as_json
-    render json: TransfersDatatable.new(view_context, {})
+    render json: TransfersDatatable.new(params)
   end
 end

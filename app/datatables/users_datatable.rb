@@ -1,4 +1,4 @@
-class UsersDatatable < AjaxDatatablesRails::Base
+class UsersDatatable < AjaxDatatablesRails::ActiveRecord
   def view_columns
     @view_columns ||= {
       name: { source: "User.name" },

@@ -1,4 +1,4 @@
-ruby '2.5.0'
+ruby '2.5.1'
 source 'https://rubygems.org'
 
 git_source(:github) do |repo_name|
@@ -18,7 +18,7 @@ gem 'devise'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'pg', '~> 0.21.0'
-gem 'ajax-datatables-rails', '0.4.0'
+gem 'ajax-datatables-rails', '>=1.0.0'
 gem 'stripe'
 gem 'activerecord-import'
 gem 'faker' # for seeds in prod

@@ -1,4 +1,4 @@
-class CouponsDatatable < AjaxDatatablesRails::Base
+class CouponsDatatable < AjaxDatatablesRails::ActiveRecord
   def view_columns
     @view_columns ||= {
       brand: { source: "Brand.name" },

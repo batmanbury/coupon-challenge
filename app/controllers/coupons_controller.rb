@@ -53,7 +53,7 @@ class CouponsController < ApplicationController
   end
 
   def as_json
-    render json: CouponsDatatable.new(view_context, { authtoken: session[:_csrf_token] })
+    render json: CouponsDatatable.new(params.merge({ authtoken: session[:_csrf_token] }))
   end
 
   private

@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   end
 
   def as_json
-    render json: UsersDatatable.new(view_context, {})
+    render json: UsersDatatable.new(params)
   end
 
   def create_charge

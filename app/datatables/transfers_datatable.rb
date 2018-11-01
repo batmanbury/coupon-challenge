@@ -1,4 +1,4 @@
-class TransfersDatatable < AjaxDatatablesRails::Base
+class TransfersDatatable < AjaxDatatablesRails::ActiveRecord
   def view_columns
     @view_columns ||= {
       poster: { source: 'Transfer.poster_name' },
